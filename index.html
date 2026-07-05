@@ -1,1 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANEMABULL - SOLANA Token | Crypto Website | Token Launch</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #eef1fa;
+    color: #1a1a2e;
+  }
+  a { color:inherit; }
+  header {
+    position:sticky; top:0; z-index:50;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 18px 48px;
+    background:#fff;
+    border-bottom:1px solid #e5e7f0;
+  }
+  .logo-area { display:flex; align-items:center; gap:12px; cursor:pointer; }
+  .logo-area img {
+    width:44px; height:44px; border-radius:50%; object-fit:cover;
+    border:1px solid #ddd;
+  }
+  .logo-area span {
+    font-weight:800; font-size:22px; letter-spacing:0.5px;
+  }
+  nav { display:flex; gap:36px; }
+  nav a {
+    text-decoration:none; color:#1a1a2e; font-weight:600; font-size:15px;
+    padding-bottom:4px; border-bottom:2px solid transparent;
+    transition: border-color .2s;
+  }
+  nav a:hover { border-color:#1a1a2e; }
+  .header-right { display:flex; align-items:center; gap:18px; }
+  .price-pill {
+    display:flex; align-items:center; gap:10px;
+    font-weight:700; font-size:15px;
+  }
+  .price-change {
+    background:#ffe1e6; color:#e0335a;
+    padding:4px 10px; border-radius:20px; font-size:13px; font-weight:700;
+  }
+  .target-mcap {
+    color:#1a9c4c; font-weight:800; font-size:15px;
+  }
+  button { font-family:inherit; cursor:pointer; }
+  .buy-btn {
+    background:#1a1a2e; color:#fff; border:none;
+    padding:12px 26px; border-radius:14px; font-weight:700;
+    font-size:15px;
+  }
+  .buy-btn:hover { background:#2e2e4d; }
 
+  main { padding-bottom:60px; }
+
+  .hero {
+    display:flex; flex-direction:column; align-items:center;
+    padding: 80px 20px 90px;
+    text-align:center;
+  }
+  .token-img-wrap {
+    width:200px; height:200px; border-radius:50%;
+    overflow:hidden; margin-bottom:36px;
+    box-shadow: 0 20px 60px rgba(26,26,46,0.12);
+    border: 6px solid #fff;
+  }
+  .token-img-wrap img { width:100%; height:100%; object-fit:cover; }
+  h1.title { font-size:64px; font-weight:800; margin-bottom:24px; }
+  .ticker-btn {
+    display:inline-block;
+    background:#1a1a2e; color:#fff;
+    padding:10px 28px; border-radius:30px;
+    font-weight:800; font-size:17px; letter-spacing:0.5px;
+    margin-bottom:14px;
+  }
+  .subtitle { font-size:20px; font-weight:600; max-width:560px; margin-bottom:40px; opacity:.75; }
+  .action-row { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-bottom:56px; }
+  .btn-primary, .btn-secondary {
+    display:flex; align-items:center; gap:8px;
+    padding:14px 28px; border-radius:14px;
+    font-weight:700; font-size:15px; border:none;
+  }
+  .btn-primary { background:#1a1a2e; color:#fff; }
+  .btn-primary:hover { background:#2e2e4d; }
+  .btn-secondary { background:#fff; color:#1a1a2e; border:2px solid #1a1a2e; }
+  .btn-secondary:hover { background:#1a1a2e; color:#fff; }
+
+  .badges { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
+  .badge {
+    display:flex; align-items:center; gap:8px;
+    padding:10px 20px; border-radius:30px;
+    background:#e7e9f2; font-weight:700; font-size:14px;
+    color:#1a1a2e; border:none;
+  }
+  .badge.active { background:#1a1a2e; color:#fff; }
+  .badge:hover { transform:translateY(-2px); box-shadow:0 6px 14px rgba(26,26,46,.15); }
+
+  section {
+    max-width:1000px; margin:0 auto; padding:70px 24px;
+    scroll-margin-top:90px;
+  }
+  section h2 {
+    font-size:38px; font-weight:800; margin-bottom:14px; text-align:center;
+  }
+  section .lead {
+    text-align:center; max-width:640px; margin:0 auto 48px; opacity:.7; font-size:16px;
+  }
+
+  .about-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  .about-card {
+    background:#fff; border-radius:20px; padding:28px;
+    box-shadow:0 10px 30px rgba(26,26,46,.06);
+  }
+  .about-card .icon { font-size:30px; margin-bottom:12px; }
+  .about-card h3 { font-size:18px; margin-bottom:8px; }
+  .about-card p { font-size:14px; opacity:.7; line-height:1.5; }
+
+  .roadmap {
+    display:flex; flex-direction:column; gap:20px;
+  }
+  .phase {
+    display:flex; gap:20px; align-items:flex-start;
+    background:#fff; border-radius:20px; padding:24px 28px;
+    box-shadow:0 10px 30px rgba(26,26,46,.06);
+    cursor:pointer; transition:transform .15s;
+  }
+  .phase:hover { transform:translateX(6px); }
+  .phase .num {
+    flex:0 0 auto; width:44px; height:44px; border-radius:50%;
+    background:#1a1a2e; color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:800;
+  }
+  .phase h3 { margin-bottom:6px; font-size:17px; }
+  .phase p { font-size:14px; opacity:.7; }
+  .phase .status { margin-left:auto; font-size:12px; font-weight:700; padding:4px 10px; border-radius:20px; align-self:center; white-space:nowrap; }
+  .status.done { background:#dcf5e3; color:#1a9c4c; }
+  .status.progress { background:#fff2d6; color:#c98a06; }
+  .status.upcoming { background:#e7e9f2; color:#555; }
+
+  .chart-box {
+    background:#fff; border-radius:20px; padding:28px;
+    box-shadow:0 10px 30px rgba(26,26,46,.06);
+  }
+  .chart-stats { display:flex; gap:30px; margin-bottom:20px; flex-wrap:wrap; }
+  .chart-stats div { font-size:14px; }
+  .chart-stats strong { display:block; font-size:20px; }
+  #priceLine { width:100%; height:auto; }
+
+  .howto { display:flex; flex-direction:column; gap:20px; }
+  .step {
+    display:flex; gap:20px; align-items:center;
+    background:#fff; border-radius:20px; padding:22px 26px;
+    box-shadow:0 10px 30px rgba(26,26,46,.06);
+    cursor:pointer;
+  }
+  .step:hover { box-shadow:0 14px 34px rgba(26,26,46,.12); }
+  .step .num {
+    flex:0 0 auto; width:40px; height:40px; border-radius:50%;
+    background:#e7e9f2; color:#1a1a2e; display:flex; align-items:center; justify-content:center;
+    font-weight:800;
+  }
+  .step h3 { font-size:16px; margin-bottom:4px; }
+  .step p { font-size:14px; opacity:.7; }
+
+  footer {
+    text-align:center; padding:30px; font-size:13px; opacity:.55;
+  }
+
+  /* toast */
+  #toast {
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:#1a1a2e; color:#fff; padding:14px 22px; border-radius:14px;
+    font-size:14px; font-weight:600; max-width:90vw; text-align:center;
+    opacity:0; pointer-events:none; transition:opacity .25s, transform .25s;
+    z-index:100; box-shadow:0 10px 30px rgba(0,0,0,.2);
+  }
+  #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  @media (max-width: 800px) {
+    header { padding:16px 20px; flex-wrap:wrap; gap:12px; }
+    nav { display:none; }
+    h1.title { font-size:38px; }
+    .token-img-wrap { width:150px; height:150px; }
+    .about-grid { grid-template-columns:1fr; }
+    .phase, .step { flex-wrap:wrap; }
+    .phase .status { margin-left:0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area" onclick="document.getElementById('top').scrollIntoView()">
+    <img src="anemabull-logo.jpg" alt="ANEMABULL logo">
+    <span>ANEMABULL</span>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#chart">Chart</a>
+    <a href="#how-to-buy">How to Buy</a>
+  </nav>
+  <div class="header-right">
+    <div class="price-pill">
+      <span class="target-mcap">🎯 Target: $300,000,000 MCAP</span>
+    </div>
+    <button class="buy-btn" onclick="document.getElementById('how-to-buy').scrollIntoView()">Buy Now</button>
+  </div>
+</header>
+
+<main>
+  <div id="top" class="hero">
+    <div class="token-img-wrap">
+      <img src="anemabull-logo.jpg" alt="ANEMABULL">
+    </div>
+
+    <h1 class="title">ANEMABULL</h1>
+
+    <div class="ticker-btn">$ANEMABULL</div>
+    <p class="subtitle">Half anime spirit, half bull market energy. A community-driven Solana token built for people who buy the dip and hold through the horns.</p>
+
+    <div class="action-row">
+      <button class="btn-primary" onclick="showToast('Открой Jupiter или Raydium и вставь контракт после листинга 🚀')">📈 Trade $ANEMABULL</button>
+      <button class="btn-secondary" onclick="showToast('Контракт будет опубликован в момент запуска токена 🔒')">🛡️ View Contract</button>
+    </div>
+
+    <div class="badges">
+      <button class="badge" onclick="showToast('Innovative: уникальная анимационная айдентика и мемная механика')">⭐ Innovative</button>
+      <button class="badge active" onclick="showToast('Solana: работает на блокчейне Solana — быстрые и дешёвые транзакции')">◎ Solana</button>
+      <button class="badge" onclick="showToast('No Tax: 0% налога на покупку и продажу')">◎ No Tax</button>
+      <button class="badge" onclick="showToast('Mint Revoked: эмиссия новых токенов невозможна — фиксированное предложение')">◎ Mint Revoked</button>
+      <button class="badge" onclick="showToast('Freeze Revoked: никто не может заморозить кошельки держателей')">◎ Freeze Revoked</button>
+      <button class="badge" onclick="showToast('Update Revoked: метаданные токена больше нельзя изменить')">◎ Update Revoked</button>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2>About $ANEMABULL</h2>
+    <p class="lead">ANEMABULL is a Solana-based meme token that fuses anime-inspired art with bull-market culture. No VC allocation, no team unlock cliffs — just a fair-launch community token built to have fun and pump together.</p>
+    <div class="about-grid">
+      <div class="about-card" onclick="showToast('100% honest supply — весь объём токенов ушёл в рынок при запуске')">
+        <div class="icon">🐂</div>
+        <h3>Fair Launch</h3>
+        <p>100% of the supply went to the open market at launch. No presale, no team allocation, no insiders.</p>
+      </div>
+      <div class="about-card" onclick="showToast('Комьюнити управляет казной проекта через голосования держателей')">
+        <div class="icon">🗳️</div>
+        <h3>Community Owned</h3>
+        <p>Marketing wallet and treasury decisions are voted on by holders. The bull herd runs the show.</p>
+      </div>
+      <div class="about-card" onclick="showToast('LP заблокирован, минт и заморозка отозваны — базовая безопасность на уровне контракта')">
+        <div class="icon">🔒</div>
+        <h3>Locked & Safe</h3>
+        <p>Liquidity locked, mint authority revoked, freeze authority revoked. Built to be rug-resistant by design.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="roadmap">
+    <h2>Roadmap</h2>
+    <p class="lead">Four phases from launch to full bull-market takeover.</p>
+    <div class="roadmap">
+      <div class="phase" onclick="showToast('Фаза 1: сайт, соцсети, фейр-лаунч на Solana и первые 500 холдеров')">
+        <div class="num">1</div>
+        <div>
+          <h3>Genesis Launch</h3>
+          <p>Website, socials, fair launch on Solana, first 500 holders milestone.</p>
+        </div>
+        <div class="status done">Completed</div>
+      </div>
+      <div class="phase" onclick="showToast('Фаза 2: листинг на DEX-скринерах, CoinGecko/CMC заявки, первые партнёрства с инфлюенсерами')">
+        <div class="num">2</div>
+        <div>
+          <h3>Herd Expansion</h3>
+          <p>DEX screener trending pushes, CoinGecko/CMC listing applications, first influencer collabs.</p>
+        </div>
+        <div class="status progress">In Progress</div>
+      </div>
+      <div class="phase" onclick="showToast('Фаза 3: NFT-коллекция ANEMABULL, мерч и запуск стейкинг-пула для холдеров')">
+        <div class="num">3</div>
+        <div>
+          <h3>Stampede</h3>
+          <p>ANEMABULL NFT collection, merch drop, staking pool for long-term holders.</p>
+        </div>
+        <div class="status upcoming">Upcoming</div>
+      </div>
+      <div class="phase" onclick="showToast('Фаза 4: листинг на CEX, кроссчейн-мост и полноценное DAO-управление проектом')">
+        <div class="num">4</div>
+        <div>
+          <h3>Full Bull Run</h3>
+          <p>CEX listing push, cross-chain bridge, full DAO governance handover to the community.</p>
+        </div>
+        <div class="status upcoming">Upcoming</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chart">
+    <h2>Chart</h2>
+    <p class="lead">Illustrative price action — a real embedded DEX chart will go live once liquidity is locked and trading opens.</p>
+    <div class="chart-box">
+      <div class="chart-stats">
+        <div>Price<strong>$0.0000163</strong></div>
+        <div>Market Cap<strong>$163K</strong></div>
+        <div>Liquidity<strong>$41K</strong></div>
+        <div>Holders<strong>512</strong></div>
+      </div>
+      <svg id="priceLine" viewBox="0 0 600 200" onclick="showToast('Реальный график появится на DexScreener/Birdeye после запуска торгов')">
+        <polyline fill="none" stroke="#1a1a2e" stroke-width="3"
+          points="0,150 60,140 120,155 180,110 240,120 300,80 360,95 420,60 480,70 540,40 600,55" />
+        <polyline fill="rgba(26,26,46,0.08)" stroke="none"
+          points="0,150 60,140 120,155 180,110 240,120 300,80 360,95 420,60 480,70 540,40 600,55 600,200 0,200" />
+      </svg>
+    </div>
+  </section>
+
+  <section id="how-to-buy">
+    <h2>How to Buy</h2>
+    <p class="lead">Four steps and you're part of the herd.</p>
+    <div class="howto">
+      <div class="step" onclick="showToast('Скачай Phantom или Solflare из официального стора и создай кошелёк')">
+        <div class="num">1</div>
+        <div><h3>Get a Wallet</h3><p>Download Phantom or Solflare from the official app store or website.</p></div>
+      </div>
+      <div class="step" onclick="showToast('Купи SOL на бирже (Binance, Coinbase и т.д.) и выведи на свой кошелёк')">
+        <div class="num">2</div>
+        <div><h3>Get SOL</h3><p>Buy SOL on any major exchange and withdraw it to your wallet address.</p></div>
+      </div>
+      <div class="step" onclick="showToast('Открой Jupiter или Raydium, вставь адрес контракта ANEMABULL после листинга и сделай своп')">
+        <div class="num">3</div>
+        <div><h3>Swap on Jupiter/Raydium</h3><p>Connect your wallet, paste the ANEMABULL contract address once live, and swap SOL for $ANEMABULL.</p></div>
+      </div>
+      <div class="step" onclick="showToast('Добавь токен в кошелёк вручную по адресу контракта, чтобы видеть баланс')">
+        <div class="num">4</div>
+        <div><h3>Add to Wallet</h3><p>Import the token using the contract address if it doesn't show up automatically.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  $ANEMABULL is a community meme token. Nothing here is financial advice — always do your own research.
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  let toastTimer;
+  function showToast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  }
+</script>
+
+</body>
+</html>
