@@ -53,6 +53,23 @@
   .target-mcap {
     color:#1a9c4c; font-weight:800; font-size:15px;
   }
+  .contract-box {
+    background:#fff; border:2px solid #1a1a2e; border-radius:16px;
+    padding:16px 22px; margin:-30px auto 40px; max-width:560px;
+    animation: fadeIn .25s ease;
+  }
+  .contract-label { font-size:12px; font-weight:700; opacity:.6; text-transform:uppercase; letter-spacing:.5px; }
+  .contract-row { display:flex; align-items:center; gap:12px; margin-top:6px; flex-wrap:wrap; justify-content:center; }
+  .contract-row code {
+    font-size:14px; font-weight:700; word-break:break-all; background:#f2f3f9;
+    padding:6px 12px; border-radius:8px;
+  }
+  .copy-btn {
+    background:#1a1a2e; color:#fff; border:none; padding:8px 16px;
+    border-radius:10px; font-weight:700; font-size:13px; white-space:nowrap;
+  }
+  .copy-btn:hover { background:#2e2e4d; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(-6px);} to { opacity:1; transform:translateY(0);} }
   button { font-family:inherit; cursor:pointer; }
   .buy-btn {
     background:#1a1a2e; color:#fff; border:none;
@@ -232,8 +249,16 @@
     <p class="subtitle">Half anime spirit, half bull market energy. A community-driven Solana token built for people who buy the dip and hold through the horns.</p>
 
     <div class="action-row">
-      <button class="btn-primary" onclick="showToast('Открой Jupiter или Raydium и вставь контракт после листинга 🚀')">📈 Trade $ANEMABULL</button>
-      <button class="btn-secondary" onclick="showToast('Контракт будет опубликован в момент запуска токена 🔒')">🛡️ View Contract</button>
+      <button class="btn-primary" onclick="showToast('Скопируй контракт кнопкой ниже и вставь в Jupiter или Raydium 🚀')">📈 Trade $ANEMABULL</button>
+      <button class="btn-secondary" onclick="toggleContract()">🛡️ View Contract</button>
+    </div>
+
+    <div id="contractBox" class="contract-box" style="display:none;">
+      <span class="contract-label">Contract Address (Solana):</span>
+      <div class="contract-row">
+        <code id="contractAddress">5GUmJB9kz6dwqhJqpLaPh8cSFHvMMZJCo1UpnZtpump</code>
+        <button class="copy-btn" onclick="copyContract()">📋 Copy</button>
+      </div>
     </div>
 
     <div class="badges">
@@ -338,7 +363,7 @@
         <div class="num">2</div>
         <div><h3>Get SOL</h3><p>Buy SOL on any major exchange and withdraw it to your wallet address.</p></div>
       </div>
-      <div class="step" onclick="showToast('Открой Jupiter или Raydium, вставь адрес контракта ANEMABULL после листинга и сделай своп')">
+      <div class="step" onclick="showToast('Открой Jupiter или Raydium, вставь адрес: 5GUmJB9kz6dwqhJqpLaPh8cSFHvMMZJCo1UpnZtpump и сделай своп')">
         <div class="num">3</div>
         <div><h3>Swap on Jupiter/Raydium</h3><p>Connect your wallet, paste the ANEMABULL contract address once live, and swap SOL for $ANEMABULL.</p></div>
       </div>
@@ -364,6 +389,21 @@
     el.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  }
+
+  function toggleContract() {
+    const box = document.getElementById('contractBox');
+    const visible = box.style.display !== 'none';
+    box.style.display = visible ? 'none' : 'block';
+  }
+
+  function copyContract() {
+    const address = document.getElementById('contractAddress').textContent;
+    navigator.clipboard.writeText(address).then(() => {
+      showToast('Адрес контракта скопирован ✅');
+    }).catch(() => {
+      showToast('Не удалось скопировать — выдели адрес вручную');
+    });
   }
 </script>
 
